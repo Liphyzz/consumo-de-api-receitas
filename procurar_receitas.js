@@ -77,7 +77,9 @@ async function procurarReceitas() {
                 break;
 
             case "3":
-                const categoria = prompt("Selecione a categoria que deseja buscar \n(doce, salgado, agridoce)\n\nR:").trim().toLowerCase();
+                console.log("Selecione a categoria que deseja buscar \n(doce, salgado, agridoce)\n\n")
+
+                const categoria = prompt("R: ").trim().toLowerCase();
                 
                 if (!['doce', 'salgado', 'agridoce'].includes(categoria)) {
                     console.log("Categoria inválida!");
@@ -85,7 +87,7 @@ async function procurarReceitas() {
                     continue;
                 }
 
-                url = `https://api-receitas-pi.vercel.app/receitas/categoria/${categoria}`;
+                url = `https://api-receitas-pi.vercel.app/receitas/tipo/${categoria}`;
                 break;
             
             case "4":
