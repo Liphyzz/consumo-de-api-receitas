@@ -1,6 +1,7 @@
 // Importa prompt-sync para ler a entrada do usuário
 const prompt = require("prompt-sync")();
 
+// Função para mostrar lista de receitas (primeiramente ela limpa a tela, então printa o título (RESULTADOS DA BUSCA) e inicia um laço forEach, onde para cada item da lista de receitas, ele vai printar no console cada informação de cada item/receita)
 function mostrarLista(lista) {
     console.clear();
     console.log("=========================");
@@ -24,8 +25,9 @@ function mostrarLista(lista) {
     );
 }
 
+// Função para mostrar uma única receita (essa função se assemelha muito com a de mostrar a lista de receitas, porém, sem o forEach, já que essa função servirá para pegar o da do de uma única receita pelo id)
 function mostrarUnico(dados) {
-    console.clear();
+    console.clear(); // limpa o console
     console.log("=========================");
     console.log("   RESULTADOS DA BUSCA");
     console.log("=========================\n");
@@ -45,6 +47,7 @@ function mostrarUnico(dados) {
     );
 }
 
+// Função principal (main), que é assíncrona para impedir que o body retorne promisse (promessa de resposta, pois não deu tempo de consultar e pegar as coisas da api antes do código seguir em frente) 
 async function procurarReceitas() {
     while (true) {
         console.clear();
@@ -103,7 +106,7 @@ async function procurarReceitas() {
         try {
             const resposta = await fetch(url);
             if (!resposta.ok) {
-                throw new Error(`Erro na requisição: ${resposta.status} - ${resposta.statusText}`);
+                throw new Error(`Erro na requisição: ${resposta.status} - ${resposta.statusText}`); // tipo o raise ValueError (retorna um erro para o except)
             }
             const dados = await resposta.json();
 
