@@ -47,9 +47,10 @@ function mostrarUnico(dados) {
     );
 }
 
-// Função principal (main), que é assíncrona para impedir que o body retorne promisse (promessa de resposta, pois não deu tempo de consultar e pegar as coisas da api antes do código seguir em frente) 
+// Função principal (main), que é assíncrona para impedir que o body retorne promisse (promessa de resposta, pois não deu tempo de consultar e pegar as coisas da api antes do código seguir em frente)
 async function procurarReceitas() {
-    while (true) {
+    while (true) { // loop para sempre retornar ao menu
+        // MENU
         console.clear();
         console.log("=========================");
         console.log("    BUSCA DE RECEITAS");
@@ -62,6 +63,12 @@ async function procurarReceitas() {
         let url;
         const opcao = prompt("Escolha uma opção: ").trim();
 
+        // switch case para identificar a opção que o usuário digitar e: 
+        // caso digite 1: define a url para buscar todas as receitas (no caso coloquei máx. 10 apenas);
+        // caso digite 2: pergunta o ID de receita desejado, faz a verificação de validade e define a url para buscar a receita que contém aaquele ID;
+        // caso digite 3: pergunta a categoria que deseja buscar, verifica a validade da resposta e se estiver tudo certo define a url para buscar todas as receitas da categoria selecionada pelo usuário;
+        // caso digite 4: encerra o loop principal, e com isso, para o programa;
+        // caso digite qualquer outra coisa: avisa que a opção é inválida e volta ao início do loop.
         switch (opcao) {
             case "1":
                 url =  "https://api-receitas-pi.vercel.app/receitas/todas?page=1&limit=10";
@@ -103,6 +110,7 @@ async function procurarReceitas() {
                 continue;
         }
 
+        // tenta buscar os dados e exibílos, caso der qualquer erro, avisa o erro e volta para o início do loop
         try {
             const resposta = await fetch(url);
             if (!resposta.ok) {
@@ -129,4 +137,4 @@ async function procurarReceitas() {
     }
 }
 
-procurarReceitas();
+procurarReceitas(); // para executar a função principal (procurarReceitas())
